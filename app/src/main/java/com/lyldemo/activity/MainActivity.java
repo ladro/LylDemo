@@ -39,6 +39,7 @@ public class MainActivity extends BaseActivity {
     private ListView listView;
     private String[] typeList;
 
+
     @Override
     public void initView() {
 
