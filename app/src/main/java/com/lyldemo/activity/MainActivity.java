@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity {
     private String[] typeList;
 
 
+
     @Override
     public void initView() {
 
@@ -59,7 +60,7 @@ public class MainActivity extends BaseActivity {
         tintManager.setNavigationBarTintEnabled(true);
 
         // 自定义颜色
-        tintManager.setTintColor(Color.parseColor("#24b7a4"));
+        tintManager.setTintColor(Color.parseColor("#fff"));
     }
     @TargetApi(19)
     private void setTranslucentStatus(boolean on) {
