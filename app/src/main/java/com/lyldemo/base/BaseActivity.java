@@ -1,19 +1,25 @@
 package com.lyldemo.base;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lyldemo.common.IconLocationType;
 import com.lyldemo.listener.TencentCallbackListener;
 import com.lyldemo.utils.ImageLoaderUtil;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.rxretrofitdemo.R;
 import com.tencent.tauth.Tencent;
 
@@ -36,8 +42,29 @@ public abstract class BaseActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         listener = new TencentCallbackListener();
         getData();
-    }
 
+        // 4.4及以上版本开启
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(true);
+        }
+        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setNavigationBarTintEnabled(true);
+        // 自定义颜色
+        tintManager.setTintColor(Color.parseColor("#53e3a9"));
+    }
+    @TargetApi(19)
+    private void setTranslucentStatus(boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
     //    public Tracker getTracker() {
 //        return tracker;
 //    }

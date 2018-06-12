@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="chedan_type">
-        <item>saasasasa</item>
+        <item>retrofit网络请求</item>
+        <item>分享功能</item>
     </string-array>
 </resources>

@@ -2,13 +2,9 @@ package com.lyldemo.activity;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,7 +13,6 @@ import com.lyldemo.base.BaseActivity;
 import com.lyldemo.base.BaseApp;
 import com.lyldemo.entity.TypeInfo;
 import com.lyldemo.retrofit.entity.RetrofitResultData;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.rxretrofitdemo.R;
 
 import org.xutils.view.annotation.ContentView;
@@ -39,8 +34,6 @@ public class MainActivity extends BaseActivity {
     private ListView listView;
     private String[] typeList;
 
-
-
     @Override
     public void initView() {
 
@@ -51,29 +44,8 @@ public class MainActivity extends BaseActivity {
         MyAdapter adapter = new MyAdapter(MainActivity.this, typeList);
         listView.setAdapter(adapter);
 
-        // 4.4及以上版本开启
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            setTranslucentStatus(true);
-        }
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        tintManager.setStatusBarTintEnabled(true);
-        tintManager.setNavigationBarTintEnabled(true);
-
-        // 自定义颜色
-        tintManager.setTintColor(Color.parseColor("#fff"));
     }
     @TargetApi(19)
-    private void setTranslucentStatus(boolean on) {
-        Window win = getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
-        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-        win.setAttributes(winParams);
-    }
     @Event(value = {}, type = View.OnClickListener.class)
     private void ViewClick(View view) {
         switch (view.getId()) {
