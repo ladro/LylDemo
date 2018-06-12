@@ -7,6 +7,6 @@ package com.lyldemo.base;
  * 网络地址字段
  */
 public class UrlFields {
-    public static final String URL_BASE = "http://openapi.yj.com.qa/";
+    public static final String URL_BASE = "http://www.weather.com.cn/";
 
 }

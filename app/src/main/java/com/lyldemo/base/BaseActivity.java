@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.lyldemo.common.IconLocationType;
 import com.lyldemo.listener.TencentCallbackListener;
-import com.lyldemo.utils.ImageLoaderUtil;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.rxretrofitdemo.R;
 import com.tencent.tauth.Tencent;
@@ -53,6 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         // 自定义颜色
         tintManager.setTintColor(Color.parseColor("#53e3a9"));
     }
+
     @TargetApi(19)
     private void setTranslucentStatus(boolean on) {
         Window win = getWindow();
@@ -65,6 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         win.setAttributes(winParams);
     }
+
     //    public Tracker getTracker() {
 //        return tracker;
 //    }
@@ -176,13 +177,16 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private void initTitle(boolean isShowBackIcon, String titleContent, String rightText, int rightTextColor, int rightIcon, IconLocationType rightIconLoation, int titleBg, final View.OnClickListener backOnClickListener, final View.OnClickListener rightOnClickListener) {
         ActionBar actionBar = getSupportActionBar();
-        int height = actionBar.getHeight();
+//        int height = actionBar.getHeight();
+//        Log.e("tag_height", "" + height);
         if (!actionBar.isShowing()) {
             actionBar.show();
         }
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(R.layout.common_title_layout);
         actionBar.setElevation(0);
+
+
        /* if (titleBg != -1) {
             actionBar.setBackgroundDrawable(getResources().getDrawable(titleBg));
         } else {
@@ -251,7 +255,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ImageLoaderUtil.clearCache();
+//        ImageLoaderUtil.clearCache();
     }
 
     @Override

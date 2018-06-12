@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import com.lyldemo.base.BaseActivity;
 import com.lyldemo.base.BaseApp;
 import com.lyldemo.entity.TypeInfo;
 import com.lyldemo.retrofit.entity.RetrofitResultData;
+import com.lyldemo.utils.IntentUtil;
 import com.rxretrofitdemo.R;
 
 import org.xutils.view.annotation.ContentView;
@@ -28,7 +30,7 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 @ContentView(R.layout.activity_main)
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements AdapterView.OnItemClickListener {
     private List<TypeInfo> list = new ArrayList<>();
     @ViewInject(R.id.list)
     private ListView listView;
@@ -43,8 +45,9 @@ public class MainActivity extends BaseActivity {
                 .chedan_type);
         MyAdapter adapter = new MyAdapter(MainActivity.this, typeList);
         listView.setAdapter(adapter);
-
+        listView.setOnItemClickListener(this);
     }
+
     @TargetApi(19)
     @Event(value = {}, type = View.OnClickListener.class)
     private void ViewClick(View view) {
@@ -53,6 +56,17 @@ public class MainActivity extends BaseActivity {
 //                EventBus.getDefault().postSticky("sasasasas");
 //                IntentUtil.redirectToNextActivity(MainActivity.this, ActivityTwo.class);
 //                break;
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        switch (i) {
+            case 0:
+                IntentUtil.redirectToNextActivity(MainActivity.this, ActivityTwo.class);
+                break;
+            case 1:
+                break;
         }
     }
 
