@@ -2,7 +2,6 @@ package com.lyldemo.activity;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -11,9 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lyldemo.base.BaseActivity;
-import com.lyldemo.base.BaseApp;
 import com.lyldemo.entity.TypeInfo;
-import com.lyldemo.retrofit.entity.RetrofitResultData;
 import com.lyldemo.utils.IntentUtil;
 import com.rxretrofitdemo.R;
 
@@ -23,11 +20,6 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DefaultObserver;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Response;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements AdapterView.OnItemClickListener {
@@ -46,6 +38,11 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         MyAdapter adapter = new MyAdapter(MainActivity.this, typeList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void getData() {
+
     }
 
     @TargetApi(19)
@@ -115,25 +112,5 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemClic
         }
     }
 
-    public void getData() {
-        BaseApp.instance().
-                getApiNetService().getShipTypeList("").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).
-                subscribe(new DefaultObserver<Response<RetrofitResultData<List<TypeInfo>>>>() {
-                    @Override
-                    public void onNext(Response<RetrofitResultData<List<TypeInfo>>> value) {
-                        Log.e("tag_onNext", "tag_onNext:" + value.body().getResult());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("tag_onError", "tag_onError:" + e.toString());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.e("tag_onComplete", "tag_onComplete:");
-                    }
-                });
-    }
 
 }
